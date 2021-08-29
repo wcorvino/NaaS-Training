@@ -27,7 +27,17 @@ def validate_and_execute():
 user_input = ""
 while user_input != "exit":
     user_input = input("Enter value  [Days]\n")
+    list_of_days = user_input.split(",")
+
+    print(list_of_days)
+    print(set(list_of_days))
+
+    print(type(list_of_days))
+    print(type(set(list_of_days)))
+
+    """
     print(type(user_input.split(",")))
     print(user_input.split(","))
-    for numb_of_days_element in user_input.split(","):
+    """
+    for numb_of_days_element in set(user_input.split(",")):
         validate_and_execute()
