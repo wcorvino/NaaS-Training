@@ -4,7 +4,7 @@ unit_conv = "Seconds"
 
 
 def days_to_unitc(number_of_days):
-    return f"{number_of_days}{unit}equals{number_of_days*k_sec_day}{unit_conv}"
+    return f"{number_of_days} {unit} equals {number_of_days * k_sec_day} {unit_conv}"
 
 
 def validate_and_execute():
