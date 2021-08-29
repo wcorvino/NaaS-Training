@@ -1,19 +1,21 @@
-# Globals
-k_sec_day = 24*60*60
-unit = "Days"
-unit_conv = "Seconds"
+
 
 # Functions
-def days_to_unitc(number_of_days):
-    return f"{number_of_days} {unit} equals {number_of_days * k_sec_day} {unit_conv}"
+def days_to_unitc(number_of_days, conversion_unit):
+    if conversion_unit == "hours":
+        return f"{number_of_days}  Days equals {number_of_days * 24}  hours"
+    elif conversion_unit == "minutes":
+        return f"{number_of_days}  Days equals {number_of_days * 24 * 60}  minutes"
+    else:
+        return "unsupported unit"
 
 
 def validate_and_execute():
     try:
-        user_input_number = int(numb_of_days_element)
+        user_input_number = int(days_and_unit_dictionary["days"])
         # conversion only for pos integers
         if user_input_number > 0:
-            calculated_value = days_to_unitc(user_input_number)
+            calculated_value = days_to_unitc(user_input_number, days_and_unit_dictionary["unit"])
             print(calculated_value)
         elif user_input_number == 0:
             print("err.entered 0")
@@ -26,18 +28,10 @@ def validate_and_execute():
 # Run
 user_input = ""
 while user_input != "exit":
-    user_input = input("Enter value  [Days]\n")
-    list_of_days = user_input.split(",")
-
-    print(list_of_days)
-    print(set(list_of_days))
-
-    print(type(list_of_days))
-    print(type(set(list_of_days)))
-
-    """
-    print(type(user_input.split(",")))
-    print(user_input.split(","))
-    """
-    for numb_of_days_element in set(user_input.split(",")):
-        validate_and_execute()
+    user_input = input("Enter value nn:text [#_of_Days:Conv_to_unit{minutes:hours}]\n")
+    days_and_unit = user_input.split(":")
+    print(days_and_unit)
+    days_and_unit_dictionary = {"days": days_and_unit[0], "unit": days_and_unit[1]}
+    print(days_and_unit_dictionary)
+    print(type(days_and_unit_dictionary))
+    validate_and_execute()
