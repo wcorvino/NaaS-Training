@@ -1,4 +1,4 @@
-k_sec_day = {24*60*60}
+k_sec_day = 24*60*60
 unit = "Days"
 unit_conv = "Seconds"
 
