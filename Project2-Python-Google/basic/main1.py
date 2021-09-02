@@ -1,9 +1,11 @@
 
-list1 = ['aa', 'xx', 'zz']
-list2 = ['bb', 'cc']
+list1 = ['aa', 'ee', 'xx', 'zz']
+list2 = ['bb', 'cc', 'yy']
 
 
 def process(list_a, list_b):
+    list_a = sorted(list_a, reverse=False)
+    list_b = sorted(list_b, reverse=False)
     result = []
     while len(list_a) and len(list_b):
 
