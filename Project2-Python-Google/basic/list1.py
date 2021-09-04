@@ -56,8 +56,6 @@ def front_x(words):
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
     # +++your code here+++
-    # sorted list of non-empty tuples, key = last element of each tuple
-    # element "x", index on last element of tuple in sort ; x[-1]
     return sorted(tuples, key=last)
 
 
@@ -73,6 +71,7 @@ def last(s):
     #    >>> x[-1]
     #    3
     #
+
 
 
 
