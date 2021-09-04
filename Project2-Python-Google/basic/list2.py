@@ -14,7 +14,13 @@
 # modify the passed in list.
 def remove_adjacent(nums):
     # +++your code here+++
-    return list(set(nums))
+    # copy list a to list b, exclude dupes
+    result = []
+    for num in nums:
+        if len(result) == 0 or num != result[-1]:
+            result.append(num)
+    return result
+    # or using set theory  just return list(set(nums))
 
 
 # E. Given two lists sorted in increasing order, create and return a merged
