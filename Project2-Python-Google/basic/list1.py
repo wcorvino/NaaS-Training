@@ -58,7 +58,14 @@ def sort_last(tuples):
     # +++your code here+++
     # sorted list of non-empty tuples, key = last element of each tuple
     # element "x", index on last element of tuple in sort ; x[-1]
-    return sorted(tuples, key=lambda x: x[-1])
+    return sorted(tuples, key=last)
+
+
+def last(s):
+    return s[-1]
+#
+    # using lambda
+    # return sorted(tuples, key=lambda x: x[-1])
     # e.g. lambda x:
     #    >>> x=(1,2,3)
     #    >>> type(x)
@@ -66,13 +73,7 @@ def sort_last(tuples):
     #    >>> x[-1]
     #    3
     #
-    # LAB(begin solution)
-    # return sorted(tuples, key=last)
-    # Extract the last element from a tuple -- used for custom sorting below.
-    # def last(a):
-    # return a[-1]
-    # LAB(end solution)
-    #
+
 
 
 # Simple provided test() function used in main() to print
