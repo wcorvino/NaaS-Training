@@ -3,7 +3,7 @@ list1 = ['aa', 'ee', 'xx', 'zz']
 list2 = ['bb', 'cc', 'yy']
 
 
-def process(list_a, list_b):
+def merge_lists(list_a, list_b):
     list_a = sorted(list_a, reverse=False)
     list_b = sorted(list_b, reverse=False)
     result = []
@@ -20,7 +20,7 @@ def process(list_a, list_b):
 
 
 def main():
-    print process(list1,list2)
+    print merge_lists(list1,list2)
 
 
 
