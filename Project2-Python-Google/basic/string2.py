@@ -53,8 +53,8 @@ def not_bad(s):
 def front_back(a, b):
   # +++your code here+++
   #find middle a, find middle b, adjust middle if len is odd
-  a_middle = int(len(a) / 2)
-  b_middle = int(len(b) / 2)
+  a_middle = len(a) / 2
+  b_middle = len(b) / 2
 
   if len(a) % 2 == 1:
     a_middle = a_middle + 1
