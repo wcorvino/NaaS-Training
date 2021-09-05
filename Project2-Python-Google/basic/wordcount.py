@@ -49,14 +49,16 @@ import sys
 ###from typing import List
 def word_count_dict(filename):
     f = open(filename, "r")
-    lines = f.read()
-    lines = lines.lower()
     dict = {}
-    for word in sorted(lines.split()):
-        if word in dict:
-            dict[word] = dict[word] + 1
-        else:
-            dict[word] = 1
+    for line in f:
+        for words in line:
+            words=line.split()
+            for word in words:
+                word = word.lower()
+                if word in dict:
+                    dict[word] = dict[word] + 1
+                else:
+                    dict[word] = 1
     f.close()
 
     return dict
@@ -72,18 +74,18 @@ def print_words(filename):
 
 def print_top(filename):
     dict = word_count_dict(filename)
-    counter = 0
+    items = sorted(dict.items(), key=key_value, reverse=True)
 
-    for key, value in sorted(dict.items(), key=lambda x: x[-1], reverse=True):
+    for key, value in items[:20]:
         print key, value
-        counter = counter + 1
-        if counter >= 20:
-            sys.exit(1)
 
     print "---------------------------"
     print
 
     return
+
+def key_value(tuple):
+    return tuple[1]
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
