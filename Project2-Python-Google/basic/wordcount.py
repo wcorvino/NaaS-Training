@@ -50,6 +50,7 @@ import sys
 def word_count_dict(filename):
     f = open(filename, "r")
     lines = f.read()
+    lines = lines.lower()
     dict = {}
     for word in sorted(lines.split()):
         if word in dict:
