@@ -47,8 +47,31 @@ import sys
 # Then print_words() and print_top() can just call the utility function.
 
 ###from typing import List
-def word_count_dict(filename):
-    f = open(filename, "r")
+
+
+def print_words(filename):
+    f = open(filename, "rU")
+    lines = f.read()
+    dict = {}
+    for word in sorted(lines.split()):
+        if word in dict:
+            dict[word] = dict[word]+1
+        else:
+            dict[word] = 1
+    f.close()
+
+    for key in sorted(dict.keys()):
+        print key, dict[key]
+
+    print "---------------------------"
+    print
+
+    return
+
+
+def print_top(filename):
+    counter = 0
+    f = open(filename, "rU")
     lines = f.read()
     dict = {}
     for word in sorted(lines.split()):
@@ -58,21 +81,6 @@ def word_count_dict(filename):
             dict[word] = 1
     f.close()
 
-    return dict
-
-def print_words(filename):
-    dict = word_count_dict(filename)
-    for key in sorted(dict.keys()):
-        print key, dict[key]
-
-    print "---------------------------"
-    print
-    return
-
-def print_top(filename):
-    dict = word_count_dict(filename)
-    counter = 0
-
     for key, value in sorted(dict.items(), key=lambda x: x[-1], reverse=True):
         print key, value
         counter = counter + 1
@@ -81,8 +89,8 @@ def print_top(filename):
 
     print "---------------------------"
     print
-
     return
+
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
