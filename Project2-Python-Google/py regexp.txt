@@ -1,0 +1,31 @@
+import re
+
+def Find(pat, text):
+    match = re.search(pat, ext)
+    if match: print match.group()
+    else: print "notg found"
+
+e.g
+Find(r"is", " this is a test")
+
+r = raw
+
+special characters
+
+. (dot any char
+\w word char
+\d digit
+\s whitespace)   \S non-whitespace
++ 1 or more
+* 0 or more
+
+minute 26 day 4 video 1;
+re.findall returns a list of matches or tuples length 2, if groups added with paren's ()
+
+w/o group
+re.findall(r'[\w.]+@[\w.]+', 'blank liam.kelso@gmail.com yatta foo@bar ') # "." in this not a meta character
+returns a list of matches
+
+with groups
+re.findall(r'([\w.]+)@([\w.]+)', 'blank liam.kelso@gmail.com yatta foo@bar ')
+returns a list of tuples
