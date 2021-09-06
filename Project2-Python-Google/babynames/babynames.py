@@ -35,7 +35,7 @@ Suggested milestones for incremental development:
 """
 
 
-def extract_names(filename):
+def extract_names(filename,summary):
     """
   Given a file name for baby.html, returns a list starting with the year string
   followed by the name-rank strings in alphabetical order.
@@ -52,7 +52,7 @@ def extract_names(filename):
     year = re.findall(r'Popularity in.*\d\d\d\d', text)
     year[0] = year[0].replace('Popularity in', '')
     year[0] = year[0].replace(' ', '')
-    print year
+    # print year
 
     # Extract the names and rank numbers and just print them
     names = re.findall(r'(<td>\d+).*(<td>\w+).*(<td>\w+)', text)
@@ -70,29 +70,41 @@ def extract_names(filename):
                 mydict[a[1]] = rank
         else:
             mydict[a[1]] = rank
-        male = (year[0], a[1], mydict[a[1]])
+        male = (a[1], mydict[a[1]])
 
         if a[2] in mydict:
             if mydict[a[2]] > a[0]:
                 mydict[a[1]] = rank
         else:
             mydict[a[2]] = rank
-        female = (year[0], a[2], mydict[a[2]])
+        female = (a[2], mydict[a[2]])
 
         mylist.append(male)
         mylist.append(female)
 
-    for key, value in sorted(mydict.items(), key=lambda x: x[-1], reverse=False):
-        print key, value
+    #for key, value in sorted(mydict.items(), key=lambda x: x[-1], reverse=False):
+        # print key, value
 
-    mytext = year + '\n'
-    for t in mylist:
+
+    print(type(year))
+    mytext = ''.join(year) + '\n'
+    for t in sorted(mylist):
         mystring = list(t)
         for txt in mystring:
             mytext = mytext + ' ' + str(txt)
         mytext = mytext + '\n'
 
     print mytext
+
+    if summary:
+      print "Summary"
+      new_filename = "./" + filename + ".summary"
+      print new_filename
+
+    with open(new_filename, "w") as f:
+      f.write(mytext)
+      f.close()
+
 
     return
 
@@ -106,8 +118,8 @@ def main():
     if not args:
         print 'usage: [--summaryfile] file [file ...]'
         sys.exit(1)
-    print sys.argv[0], sys.argv[1], sys.argv[2]
-    print args[0], args[1]
+    # print sys.argv[0], sys.argv[1], sys.argv[2]
+    # print args[0], args[1]
     # Notice the summary flag and remove it from args if it is present.
     summary = False
     if args[0] == '--summaryfile':
@@ -117,7 +129,7 @@ def main():
     # For each filename, get the names, then either print the text output
     # or write it to a summary file
     for filename in args:
-        extract_names(filename)
+        extract_names(filename, summary)
 
 
 if __name__ == '__main__':
