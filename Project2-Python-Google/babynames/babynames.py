@@ -120,6 +120,22 @@ def main():
     # +++your code here+++
     # For each filename, get the names, then either print the text output
     # or write it to a summary file
+
+
+    from os.path import exists
+
+    for filename in args:
+        if not exists(filename):
+            print
+            print 'error: check file names and usage.'
+            print
+            print 'usage: [--summaryfile] file [file ...]'
+            print
+            sys.exit(1)
+
+
+
+
     for filename in args:
         extract_names(filename, summary)
 
