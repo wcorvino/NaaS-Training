@@ -35,7 +35,7 @@ Suggested milestones for incremental development:
 """
 
 
-def extract_names(filename,summary):
+def extract_names(filename, summary):
     """
   Given a file name for baby.html, returns a list starting with the year string
   followed by the name-rank strings in alphabetical order.
@@ -82,11 +82,6 @@ def extract_names(filename,summary):
         mylist.append(male)
         mylist.append(female)
 
-    #for key, value in sorted(mydict.items(), key=lambda x: x[-1], reverse=False):
-        # print key, value
-
-
-    print(type(year))
     mytext = ''.join(year) + '\n'
     for t in sorted(mylist):
         mystring = list(t)
@@ -97,15 +92,12 @@ def extract_names(filename,summary):
     print mytext
 
     if summary:
-      print "Summary"
-      new_filename = "./" + filename + ".summary"
-      print new_filename
-
-    with open(new_filename, "w") as f:
-      f.write(mytext)
-      f.close()
-
-
+        print "Summary"
+        new_filename = "./" + filename + ".summary"
+        print new_filename
+        with open(new_filename, "w") as f:
+            f.write(mytext)
+            f.close()
     return
 
 
