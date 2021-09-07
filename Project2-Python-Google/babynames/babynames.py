@@ -58,21 +58,24 @@ def extract_names(filename, summary):
     mydict = {}
     mylist = []
 
-    for (rank,m,f) in names:
-        # Male
-        if m in mydict:
-            if mydict[m] > rank:
-                mydict[m] = rank
-        else:
-            mydict[m] = rank
+    for (rank, m, f) in names:
+        mydict[m] = rank
+        mydict[f] = rank
 
-        #Female
-        if f in mydict:
-            if mydict[f] > rank:
-                mydict[f] = rank
-        else:
-            mydict[f] = rank
+    for (rank, m, f) in names:
+        male = [m, rank]
+        if not mydict[m] == rank:
+            mylist.append(male)
 
+        female = [f, rank]
+        if not mydict[f] == rank:
+            mylist.append(female)
+
+    for line in mylist:
+        x = line
+        mydict[x[0]] = x[1]
+
+    mylist = []
     #create sorted list
     for t in mydict.items(): mylist.append(t)
 
