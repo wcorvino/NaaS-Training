@@ -84,6 +84,7 @@ def extract_names(filename, summary):
             mytext = mytext + ' ' + str(txt)
         mytext = mytext + '\n'
 
+    #create summary files or output text
     if summary:
         new_filename = "./" + filename + ".summary"
         print new_filename
@@ -92,6 +93,7 @@ def extract_names(filename, summary):
             f.close()
     else:
         print filename
+        print year
         for k,v in sorted(mydict.items(), key=lambda x: x[-1], reverse = False):
             print k + ' ' + str(v)
     return
