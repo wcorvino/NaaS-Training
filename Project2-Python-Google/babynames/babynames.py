@@ -82,9 +82,8 @@ def extract_names(filename, summary):
 
     # create text report for output to file
     mytext = ''.join(year) + '\n'
-    for t in sorted(mylist):
-        mystring = list(t)
-        for txt in mystring:
+    for strings in sorted(mylist):
+        for txt in list(strings):
             mytext = mytext + ' ' + str(txt)
         mytext = mytext + '\n'
 
