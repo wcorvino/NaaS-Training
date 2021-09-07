@@ -47,9 +47,7 @@ def extract_names(filename, summary):
     f.close()
 
     # Extract the year and print it
-    year = re.findall(r'Popularity in.*\d\d\d\d', text)
-    year[0] = year[0].replace('Popularity in', '')
-    year[0] = year[0].replace(' ', '')
+    year = re.findall(r'Popularity in.*(\d\d\d\d)', text)
 
     # Extract the names and rank numbers, dupes removed by dictionary
     names = re.findall(r'<td>(\d+).*<td>(\w+).*<td>(\w+)', text)
