@@ -63,6 +63,11 @@ def extract_names(filename, summary):
         a[0] = a[0].replace(r'<td>', '')
         a[1] = a[1].replace(r'<td>', '')
         a[2] = a[2].replace(r'<td>', '')
+        #
+        a[0] = a[0].strip()
+        a[1] = a[1].strip()
+        a[2] = a[2].strip()
+        #
         rank = int(a[0])
 
         if a[1] in mydict:
@@ -81,6 +86,9 @@ def extract_names(filename, summary):
 
         mylist.append(male)
         mylist.append(female)
+
+    myset = set(mylist)
+    mylist = list(myset)
 
     mytext = ''.join(year) + '\n'
     for t in sorted(mylist):
