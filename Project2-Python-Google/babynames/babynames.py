@@ -88,7 +88,7 @@ def extract_names(filename, summary):
             mytext = mytext + ' ' + str(txt)
         mytext = mytext + '\n'
 
-    # create summary files or output text
+    # check flag ; create summary files  or just output text
     if summary:
         new_filename = "./" + filename + ".summary"
         print new_filename
