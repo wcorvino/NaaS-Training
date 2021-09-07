@@ -54,46 +54,35 @@ def extract_names(filename, summary):
     year[0] = year[0].replace(' ', '')
 
     # Extract the names and rank numbers, dupes removed by dictionary
-    names = re.findall(r'(<td>\d+).*(<td>\w+).*(<td>\w+)', text)
+    names = re.findall(r'<td>(\d+).*<td>(\w+).*<td>(\w+)', text)
     mydict = {}
     mylist = []
-    for name in names:
-        a = list(name)
-        a[0] = a[0].replace(r'<td>', '')
-        a[1] = a[1].replace(r'<td>', '')
-        a[2] = a[2].replace(r'<td>', '')
-        #
-        a[0] = a[0].strip()
-        a[1] = a[1].strip()
-        a[2] = a[2].strip()
-        #
-        rank = int(a[0])
 
+    for (rank,m,f) in names:
         # Male
-        if a[1] in mydict:
-            if mydict[a[1]] > a[0]:
-                mydict[a[1]] = rank
+        if m in mydict:
+            if mydict[m] > rank:
+                mydict[m] = rank
         else:
-            mydict[a[1]] = rank
+            mydict[m] = rank
 
         #Female
-        if a[2] in mydict:
-            if mydict[a[2]] > a[0]:
-                mydict[a[1]] = rank
+        if f in mydict:
+            if mydict[f] > rank:
+                mydict[f] = rank
         else:
-            mydict[a[2]] = rank
+            mydict[f] = rank
 
     #create sorted list
     for t in mydict.items(): mylist.append(t)
 
+    #create text report for output to file
     mytext = ''.join(year) + '\n'
     for t in sorted(mylist):
         mystring = list(t)
         for txt in mystring:
             mytext = mytext + ' ' + str(txt)
         mytext = mytext + '\n'
-
-
 
     if summary:
         new_filename = "./" + filename + ".summary"
@@ -103,7 +92,7 @@ def extract_names(filename, summary):
             f.close()
     else:
         print filename
-        for k,v in sorted(mydict.items(), key=lambda x: x[-1], reverse = True):
+        for k,v in sorted(mydict.items(), key=lambda x: x[-1], reverse = False):
             print k + ' ' + str(v)
     return
 
