@@ -52,9 +52,8 @@ def extract_names(filename, summary):
     year = re.findall(r'Popularity in.*\d\d\d\d', text)
     year[0] = year[0].replace('Popularity in', '')
     year[0] = year[0].replace(' ', '')
-    # print year
 
-    # Extract the names and rank numbers and just print them
+    # Extract the names and rank numbers, dupes removed by dictionary
     names = re.findall(r'(<td>\d+).*(<td>\w+).*(<td>\w+)', text)
     mydict = {}
     mylist = []
@@ -70,19 +69,21 @@ def extract_names(filename, summary):
         #
         rank = int(a[0])
 
+        # Male
         if a[1] in mydict:
             if mydict[a[1]] > a[0]:
                 mydict[a[1]] = rank
         else:
             mydict[a[1]] = rank
 
-
+        #Female
         if a[2] in mydict:
             if mydict[a[2]] > a[0]:
                 mydict[a[1]] = rank
         else:
             mydict[a[2]] = rank
 
+    #create sorted list
     for t in mydict.items(): mylist.append(t)
 
     mytext = ''.join(year) + '\n'
@@ -139,9 +140,6 @@ def main():
             print 'usage: [--summaryfile] file [file ...]'
             print
             sys.exit(1)
-
-
-
 
     for filename in args:
         extract_names(filename, summary)
