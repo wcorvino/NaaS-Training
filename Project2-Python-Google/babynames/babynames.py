@@ -46,7 +46,7 @@ def extract_names(filename, summary):
     text = f.read()
     f.close()
 
-    print filename
+    #print filename
 
     # Extract the year and print it
     year = re.findall(r'Popularity in.*\d\d\d\d', text)
@@ -75,20 +75,15 @@ def extract_names(filename, summary):
                 mydict[a[1]] = rank
         else:
             mydict[a[1]] = rank
-        male = (a[1], mydict[a[1]])
+
 
         if a[2] in mydict:
             if mydict[a[2]] > a[0]:
                 mydict[a[1]] = rank
         else:
             mydict[a[2]] = rank
-        female = (a[2], mydict[a[2]])
 
-        mylist.append(male)
-        mylist.append(female)
-
-    myset = set(mylist)
-    mylist = list(myset)
+    for t in mydict.items(): mylist.append(t)
 
     mytext = ''.join(year) + '\n'
     for t in sorted(mylist):
@@ -97,15 +92,18 @@ def extract_names(filename, summary):
             mytext = mytext + ' ' + str(txt)
         mytext = mytext + '\n'
 
-    print mytext
+
 
     if summary:
-        print "Summary"
         new_filename = "./" + filename + ".summary"
         print new_filename
         with open(new_filename, "w") as f:
             f.write(mytext)
             f.close()
+    else:
+        print filename
+        for k,v in sorted(mydict.items(), key=lambda x: x[-1], reverse = True):
+            print k + ' ' + str(v)
     return
 
 
@@ -125,6 +123,7 @@ def main():
     if args[0] == '--summaryfile':
         summary = True
         del args[0]
+        print "Summary"
     # +++your code here+++
     # For each filename, get the names, then either print the text output
     # or write it to a summary file
