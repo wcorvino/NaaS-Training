@@ -46,8 +46,6 @@ def extract_names(filename, summary):
     text = f.read()
     f.close()
 
-    #print filename
-
     # Extract the year and print it
     year = re.findall(r'Popularity in.*\d\d\d\d', text)
     year[0] = year[0].replace('Popularity in', '')
@@ -62,6 +60,7 @@ def extract_names(filename, summary):
         mydict[m] = rank
         mydict[f] = rank
 
+    # create rank corrections list for dupe names
     for (rank, m, f) in names:
         male = [m, rank]
         if not mydict[m] == rank:
@@ -71,15 +70,17 @@ def extract_names(filename, summary):
         if not mydict[f] == rank:
             mylist.append(female)
 
+    # apply corrections to mydict
     for line in mylist:
         x = line
         mydict[x[0]] = x[1]
 
     mylist = []
-    #create sorted list
-    for t in mydict.items(): mylist.append(t)
+    # create sorted list
+    for t in mydict.items():
+        mylist.append(t)
 
-    #create text report for output to file
+    # create text report for output to file
     mytext = ''.join(year) + '\n'
     for t in sorted(mylist):
         mystring = list(t)
@@ -87,7 +88,7 @@ def extract_names(filename, summary):
             mytext = mytext + ' ' + str(txt)
         mytext = mytext + '\n'
 
-    #create summary files or output text
+    # create summary files or output text
     if summary:
         new_filename = "./" + filename + ".summary"
         print new_filename
@@ -97,7 +98,7 @@ def extract_names(filename, summary):
     else:
         print filename
         print year
-        for k,v in sorted(mydict.items(), key=lambda x: x[-1], reverse = False):
+        for k, v in sorted(mydict.items(), key=lambda val: val[-1], reverse=False):
             print k + ' ' + str(v)
     return
 
@@ -122,7 +123,6 @@ def main():
     # +++your code here+++
     # For each filename, get the names, then either print the text output
     # or write it to a summary file
-
 
     from os.path import exists
 
