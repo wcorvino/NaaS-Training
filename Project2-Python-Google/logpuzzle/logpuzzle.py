@@ -30,7 +30,7 @@ def read_urls(filename):
     f.close()
 
     url_list = ','.join(re.findall(r'GET (\S+.*jpg)', text))
-    url_list = sorted(url_list.split(','))
+    url_list = url_list.split(',')
     url_list = set(url_list)
     url_list = list(url_list)
 
@@ -38,7 +38,7 @@ def read_urls(filename):
         url_list[i] = "http://code.google.com" + url_list[i]
         # debug print url_list[i]
 
-    return url_list
+    return sorted(url_list)
 
 
 
@@ -51,6 +51,34 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
     # +++your code here+++
+    try:
+        if not os.path.exists(dest_dir):
+            os.mkdir(dest_dir)
+    except ValueError:
+        print "Directory {dest_dir} already exists"
+    image_seq = "<html>\n"
+    image_seq = image_seq + '<body>\n'
+    seq_no=0
+    for url in img_urls:
+        file_path = os.path.abspath('.') + '/' + dest_dir  + '/image' + str(seq_no)+".jpg"
+        urllib.urlretrieve(url, file_path)
+        #
+        s = 'image' + str(seq_no)+".jpg"
+        print s
+        #
+        s = '<img src="./' + s + '">'
+        image_seq = image_seq + s
+        #
+        seq_no= seq_no+1
+    image_seq = image_seq + '<\n/body>\n'
+    image_seq = image_seq + '</html>\n'
+    # debug print image_seq
+
+    index_filename = os.path.abspath('.') + '/' + dest_dir + 'index.html'
+    with open(index_filename, "w") as f:
+        f.write(image_seq)
+        f.close()
+    return
 
 
 def main():
