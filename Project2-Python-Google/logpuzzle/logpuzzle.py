@@ -38,7 +38,15 @@ def read_urls(filename):
         url_list[i] = "http://code.google.com" + url_list[i]
         # debug print url_list[i]
 
-    return sorted(url_list)
+    url_dict = {}
+    for url in url_list:
+        url_dict[url] = re.findall(r'-(\w\w\w\w).jpg', url)
+
+    url_list = []
+    for k, v in sorted(url_dict.items(), key=lambda val: val[-1], reverse=False):
+            url_list.append(k)
+
+    return url_list
 
 
 
@@ -56,6 +64,7 @@ def download_images(img_urls, dest_dir):
             os.mkdir(dest_dir)
     except ValueError:
         print "Directory {dest_dir} already exists"
+
     image_seq = "<html>\n"
     image_seq = image_seq + '<body>\n'
     seq_no=0
@@ -70,11 +79,11 @@ def download_images(img_urls, dest_dir):
         image_seq = image_seq + s
         #
         seq_no= seq_no+1
-    image_seq = image_seq + '<\n/body>\n'
+    image_seq = image_seq + '</body>\n'
     image_seq = image_seq + '</html>\n'
     # debug print image_seq
 
-    index_filename = os.path.abspath('.') + '/' + dest_dir + 'index.html'
+    index_filename = os.path.abspath('.') + '/' + dest_dir + '/index.html'
     with open(index_filename, "w") as f:
         f.write(image_seq)
         f.close()
