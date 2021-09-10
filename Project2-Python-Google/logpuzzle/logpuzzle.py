@@ -44,10 +44,9 @@ def read_urls(filename):
 
     url_list = []
     for k, v in sorted(url_dict.items(), key=lambda val: val[-1], reverse=False):
-            url_list.append(k)
+        url_list.append(k)
 
     return url_list
-
 
 
 def download_images(img_urls, dest_dir):
@@ -67,18 +66,18 @@ def download_images(img_urls, dest_dir):
 
     image_seq = "<html>\n"
     image_seq = image_seq + '<body>\n'
-    seq_no=0
+    seq_no = 0
     for url in img_urls:
-        file_path = os.path.abspath('.') + '/' + dest_dir  + '/image' + str(seq_no)+".jpg"
+        file_path = os.path.abspath('.') + '/' + dest_dir + '/image' + str(seq_no) + ".jpg"
         urllib.urlretrieve(url, file_path)
         #
-        s = 'image' + str(seq_no)+".jpg"
+        s = 'image' + str(seq_no) + ".jpg"
         print s
         #
         s = '<img src="./' + s + '">'
         image_seq = image_seq + s
         #
-        seq_no= seq_no+1
+        seq_no = seq_no + 1
     image_seq = image_seq + '</body>\n'
     image_seq = image_seq + '</html>\n'
     # debug print image_seq
