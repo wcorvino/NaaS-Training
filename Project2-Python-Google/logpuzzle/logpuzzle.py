@@ -94,6 +94,17 @@ def main():
 
     if not args:
         print 'usage: [--todir dir] logfile '
+        txt = \
+        """
+        Returns a list of the puzzle urls from the given log file,
+        extracting the hostname from the filename itself.
+                 
+        [--todir]
+        Downloads each image into the given directory.
+        Gives the images local filenames img0, img1, and so on.
+        Launch index.html in Firefox browser to display image
+        """
+        print txt
         sys.exit(1)
 
     todir = ''
