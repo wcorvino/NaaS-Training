@@ -69,9 +69,22 @@ def extract_names(filename, summary):
             mylist.append(female)
 
     # apply corrections to mydict
-    for line in mylist:
+    mytext = ""
+    for line in sorted(mylist):
         x = line
         mydict[x[0]] = x[1]
+        #log dupe - male-female same name
+        for txt in x:
+            mytext = mytext + " " +  txt
+        mytext = mytext + "\n"
+
+
+    # save logfile of dupes, male & female same name
+    new_filename = "./dupenames.log"
+    print new_filename
+    with open(new_filename, "w") as f:
+        f.write(mytext)
+        f.close()
 
     mylist = []
     # create sorted list
@@ -107,7 +120,23 @@ def main():
     args = sys.argv[1:]
 
     if not args:
+        print
+        print 'error: check file names and usage.'
+        print
         print 'usage: [--summaryfile] file [file ...]'
+        print
+        x = """$ python babynames.py baby*.html
+        Returns the data from the file as a single list -- the year string at the start of the
+        list followed by the name-rank strings in alphabetical order.
+        ['2006', 'Aaliyah 91', 'Abagail 895', 'Aaron 57', ...].
+        
+        [--summaryfile]
+        $ python babynames.py --summaryfile baby*.html
+        This generates all the summaries in one step.
+        Then grep,   $ grep 'Trinity ' *.summary
+        """
+        print x
+        print
         sys.exit(1)
     # print sys.argv[0], sys.argv[1], sys.argv[2]
     # print args[0], args[1]
@@ -129,6 +158,28 @@ def main():
             print 'error: check file names and usage.'
             print
             print 'usage: [--summaryfile] file [file ...]'
+            print
+            x = """$ python babynames.py baby*.html
+            Returns the data from the file as a single list -- the year string at the start of the
+            list followed by the name-rank strings in alphabetical order.
+            ['2006', 'Aaliyah 91', 'Abagail 895', 'Aaron 57', ...].
+             
+            $ python babynames.py --summaryfile baby*.html
+            This generates all the summaries in one step.
+            
+            Then grep, 
+            $ grep 'Trinity ' *.summary
+            $ grep 'Nick ' *.summary
+            $ grep 'Miguel ' *.summary
+            $ grep 'Emily ' *.summary
+
+            $ grep "William" baby*html.summary | sort -r | more
+
+            $ python babynames.py baby2008.html | grep Abby
+               vs.
+            $ grep "Abby"  baby2008.html.summary
+            """
+            print x
             print
             sys.exit(1)
 
