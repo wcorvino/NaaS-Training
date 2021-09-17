@@ -62,7 +62,15 @@ def main():
   # which is the script itself.
   args = sys.argv[1:]
   if not args:
+    print
     print "usage: [--todir dir][--tozip zipfile] dir [dir ...]";
+    print
+    print " copy pattern: '__(\w+)__', in directory-list: dir [dir ...], to directory or to zipzile"
+    print
+    print "    src-fn: special file, pattern __.*__"
+    print "    src-dir: dir [dir ...]"
+    print "    dst: dir (or zipfile)"
+    print
     sys.exit(1)
 
   # todir and tozip are either set from command line
