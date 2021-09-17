@@ -93,6 +93,8 @@ def main():
     args = sys.argv[1:]
 
     if not args:
+        print
+        print
         print 'usage: [--todir dir] logfile '
         txt = \
         """
@@ -102,7 +104,7 @@ def main():
         [--todir]
         Downloads each image into the given directory.
         Gives the images local filenames img0, img1, and so on.
-        Launch index.html in Firefox browser to display image
+        Launch index.html in Firefox browser to display the image.
         """
         print txt
         sys.exit(1)

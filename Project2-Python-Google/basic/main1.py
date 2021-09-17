@@ -20,7 +20,7 @@ def merge_lists(list_a, list_b):
 
 
 def main():
-    print merge_lists(list1,list2)
+    print ["Merged / Sorted Lists : "] + merge_lists(list1,list2)
 
 
 
