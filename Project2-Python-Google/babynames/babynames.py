@@ -50,16 +50,18 @@ def extract_names(filename, summary):
     year = re.findall(r'Popularity in.*(\d\d\d\d)', text)
 
     # Extract the names and rank numbers, dupes removed by dictionary
-    names = re.findall(r'<td>(\d+).*<td>(\w+).*<td>(\w+)', text)
+    parsed_names = re.findall(r'<td>(\d+).*<td>(\w+).*<td>(\w+)', text)
     mydict = {}
     mylist = []
 
-    for (rank, m, f) in names:
+    #stage dictionary, ignore ranking rules for now
+    #table headings - "rank" , "male name", "female name"
+    for (rank, m, f) in parsed_names:
         mydict[m] = rank
         mydict[f] = rank
 
-    # create rank corrections list for dupe names
-    for (rank, m, f) in names:
+    # create ranking_rules corrections ; short-list of dupe names w/rank
+    for (rank, m, f) in parsed_names:
         male = [m, rank]
         if not mydict[m] == rank:
             mylist.append(male)
@@ -68,12 +70,17 @@ def extract_names(filename, summary):
         if not mydict[f] == rank:
             mylist.append(female)
 
-    # apply corrections to mydict
+    # dictionary staging, step 2 apply corrections to mydict
+    # use the list to update the dictionary
+    # tie breaker rule = lowest ranking  for x[0] "any name"
+    # in the sorted list is the last ranking update applied.
+    # cat dupenames.log, then $ [grep '{any-name} ' *.summary] # to validate
+
     mytext = ""
     for line in sorted(mylist):
         x = line
         mydict[x[0]] = x[1]
-        #log dupe - male-female same name
+    # log dupe - male-female same name - create log.file
         for txt in x:
             mytext = mytext + " " +  txt
         mytext = mytext + "\n"
