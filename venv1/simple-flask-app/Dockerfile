@@ -5,6 +5,6 @@ RUN apt install -y nano
 RUN apt install -y python
 RUN apt install -y python3-pip
 RUN pip install flask
-COPY ./app.py /opt/app.py
+COPY app.py etc/opt/app.py
 
-ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080
+ENTRYPOINT FLASK_APP=etc/opt/app.py flask run --host=0.0.0.0 --port=8080
