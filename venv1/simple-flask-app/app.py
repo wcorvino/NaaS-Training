@@ -16,7 +16,7 @@ if __name__=="__main__":
 """
 ubuntu it session commands used to create Dockerfile
 
-docker run -it ubtunu bash
+docker run -it ubuntu bash
 apt update
 apt install -y python
 apt install -y python3-pip
