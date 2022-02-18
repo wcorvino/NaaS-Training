@@ -1,4 +1,5 @@
 import os
+from re import L
 from flask import Flask
 app = Flask(__name__)
 
@@ -24,6 +25,7 @@ pip install flask
 apt install nano
 copy app.py /opt/app.py
 
-FLASK_APP=/opt/app.py flask run --host=0.0.0.0
+FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080
 
 """
+#end
