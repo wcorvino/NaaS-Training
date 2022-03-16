@@ -1,4 +1,5 @@
 import os
+# from re import L
 from flask import Flask
 app = Flask(__name__)
 
@@ -10,7 +11,7 @@ def main():
 def hello():
     return 'I am good, how about you?'
 
-if __name__=="__main__":
+if __name__ == "__main__":
     app.run()
 
 """
@@ -24,6 +25,7 @@ pip install flask
 apt install nano
 copy app.py /opt/app.py
 
-FLASK_APP=/opt/app.py flask run --host=0.0.0.0
+FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080
 
 """
+#end
